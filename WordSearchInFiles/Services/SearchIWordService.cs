@@ -78,10 +78,17 @@ namespace WordSearchInFiles.Services
                 using (var file = new StreamReader(filePath))
                     textFile = await file.ReadToEndAsync();
 
+                var listWords = Regex
+                    .Split(textFile, @"[\.!(,\s:;?)]")
+                    .Where(word => word != "-")         //Учитываем слова с дефисом
+                    .Select(word => word.ToLower());    //Для независимости от регистра    
+
+                var wordsSet = new HashSet<string>(listWords);
+
                 var result = new SearchResultDto
                 {
                     FileName = Path.GetFileName(filePath),
-                    Result = Regex.IsMatch(textFile.ToLower(), $"\\b{word.ToLower()}\\b")   
+                    Result = wordsSet.TryGetValue(word.ToLower(), out _)
                 };
 
                 return result;
