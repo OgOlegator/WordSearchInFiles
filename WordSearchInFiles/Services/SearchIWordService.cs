@@ -12,13 +12,13 @@ namespace WordSearchInFiles.Services
     {
         private const string SolutionAndApiSubPath = "WordSearchInFiles\\WordSearchInFiles";
 
-        public async Task<List<string>> Execute(string word)
+        public async Task<List<string>> ExecuteAsync(string word)
         {
             var listTasks = new List<Task<SearchResultDto>>();
  
             foreach (var file in GetFilesPath()) 
             {
-                listTasks.Add(SearchWordInFile(file, word));
+                listTasks.Add(SearchWordInFileAsync(file, word));
             }
 
             await Task.WhenAll(listTasks);
@@ -69,7 +69,7 @@ namespace WordSearchInFiles.Services
         /// <param name="word">Искомое слово</param>
         /// <returns>Результат поиска</returns>
         /// <exception cref="Exception">Ошибка поиска</exception>
-        private async Task<SearchResultDto> SearchWordInFile(string filePath, string word)
+        private async Task<SearchResultDto> SearchWordInFileAsync(string filePath, string word)
         {
             try
             {

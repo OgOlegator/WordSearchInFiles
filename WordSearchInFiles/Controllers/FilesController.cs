@@ -14,7 +14,7 @@ namespace WordSearchInFiles.Controllers
         {
             try
             {
-                return Ok(await new SearchIWordService().Execute(word));
+                return Ok(await new SearchIWordService().ExecuteAsync(word));
             }
             catch (Exception ex) 
             {
