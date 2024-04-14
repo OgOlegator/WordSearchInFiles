@@ -40,7 +40,7 @@ namespace WordSearchInFiles.Services
             {
                 var projectLocation = Assembly.GetExecutingAssembly().Location;
 
-                var apiFileLocation = projectLocation.Split(SolutionAndApiSubPath).First() + SolutionAndApiSubPath;
+                var apiFileLocation = Path.Combine(projectLocation.Split(SolutionAndApiSubPath).First(), SolutionAndApiSubPath);
 
                 var path = Path.Combine(apiFileLocation, "files");
 
